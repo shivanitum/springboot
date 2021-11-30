@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+  <title>Save Book</title>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h3>Book Form</h3>
+  <hr>
+
+  <p class="h4 mb-4">Save Book</p>
+
+  <form action="#" th:action="@{/categories/save-book(categoryId=${category.id})}"
+        th:object="${book}" method="POST">
+
+    <input type="hidden" th:field="*{id}" />
+
+    <p> Enter Title:</p>
+    <div class="form-row py-1">
+      <input type="text" th:field="*{title}"
+             class="form-control  col-4" placeholder="Title" th:errorClass="is-invalid" required oninvalid="InvalidMsg(this);"
+             oninput="InvalidMsg(this);">
+      <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="invalid-feedback"></div>
+    </div>
+
+    <p> Enter Edition:</p>
+    <div class="form-row py-1">
+      <input type="text" class="form-control mb-4 col-4" name="edition" th:value="*{edition}"
+             placeholder="Enter edition" th:errorClass="is-invalid" required oninvalid="InvalidMsg(this);"
+             oninput="InvalidMsg(this);">
+
+      <div th:if="${#fields.hasErrors('edition')}" th:errors="*{edition}" class="invalid-feedback"></div>
+    </div>
+    <script>
+        function InvalidMsg(textbox) {
+
+            if (textbox.value === '') {
+                textbox.setCustomValidity
+                      ('Entering a valid name or edition is necessary');
+            } else if (textbox.validity.typeMismatch) {
+                textbox.setCustomValidity
+                      ('Please enter a value which is valid!');
+            } else {
+                textbox.setCustomValidity('');
+            }
+
+            return true;
+        }
+    </script>
+
+
+    <br>
+
+    <button type="submit" class="btn btn-info col-2">Save</button>
+
+  </form>
+
+  <hr>
+  <a th:href="@{/books/list}">Back to Books List</a>
+
+</div>
+</body>
+
+</html>

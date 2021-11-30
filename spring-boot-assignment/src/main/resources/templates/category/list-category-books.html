@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Library Management</title>
+</head>
+
+<body>
+
+<div class="container" sec-authorize>
+
+    <h3>Library</h3>
+    <hr>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+
+            <th>Title</th>
+            <th>Edition</th>
+            <th>CategoryId</th>
+            <th>Action</th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="tempBook : ${books}">
+
+
+            <td th:text="${tempBook.title}" />
+            <td th:text="${tempBook.edition}" />
+            <td th:text="${tempBook.category.id}" />
+
+            <td>
+                <div style="display: flex;">
+                <form action="#" th:action="@{/books/showFormForUpdate}"  method="POST">
+
+                    <input type="hidden" name="bookId" th:value="${tempBook.id}" />
+                    <button type="submit" class="btn btn-info btn-sm">Update</button>
+
+                </form>
+
+
+                <!-- Add "delete" button/link -->
+                <a sec:authorize="hasAnyRole('ROLE_ADMIN')" th:href="@{/books/delete(bookId=${tempBook.id})}"
+                   class="btn btn-danger btn-sm"
+                   onclick="if (!(confirm('Are you sure you want to delete this book?'))) return false">
+                    Delete
+                </a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/categories/list}">Previous Page</a>
+</div>
+
+</body>
+</html>

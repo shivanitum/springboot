@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Library Management</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Category</h3>
+    <hr>
+
+    <!-- Add a button -->
+    <div class="user-details">
+    <div class="username" style="text-align-last: left;" th:text="'Logged in as: '+${user.username}"/>
+    <div class="role" style="text-align-last: left;" th:text="'Role: '+${user.theAuthority.authorityRole} "/>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+
+            <th>Name</th>
+            <th>CategoryId</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="tempCategory : ${categories}">
+
+
+            <td th:text="${tempCategory.name}" />
+            <td th:text="${tempCategory.id}" />
+            <td>
+            <!-- Add "delete" button/link -->
+
+                <a  th:href="@{/categories/list-books(categoryId=${tempCategory.id})}"
+                   class="btn btn-primary btn-sm">
+                    List of Books in this category
+                </a>
+                <a  th:href="@{/categories/add-book(categoryId=${tempCategory.id})}"
+                   class="btn btn-success btn-sm">
+                    Add Books to this category
+                </a>
+                <a th:href="@{/categories/delete(categoryId=${tempCategory.id})}"
+                   class="btn btn-danger btn-sm">
+                    Delete Category
+                </a>
+
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+    <hr>
+    <a th:href="@{/books/list}">Back to Home Page</a>
+</div>
+
+</body>
+</html>
