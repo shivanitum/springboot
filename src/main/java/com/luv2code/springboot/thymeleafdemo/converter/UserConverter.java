@@ -17,7 +17,7 @@ public class UserConverter {
 
     }
 
-    /*public User dtoToEntity(UserDTO userDTO)
+    public User dtoToEntity(UserDTO userDTO)
     {
         User user = new User();
         user.setUserId(userDTO.getUserId());
@@ -26,5 +26,5 @@ public class UserConverter {
         user.setTheAuthority(userDTO.getTheAuthority());
 
         return user;
-    }*/
+    }
 }
