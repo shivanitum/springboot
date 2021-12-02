@@ -147,8 +147,8 @@ public class CategoryController {
     }
 
     @PostMapping("/register")
-    public String processRegister(@Valid User user, BindingResult bindingResult) {
-
+    public String processRegister(@Valid UserDTO userDTO, BindingResult bindingResult) {
+        User user=userDTO.dtoToEntity(userDTO);
         user.setTheAuthority(new Authority(2));
         user.setEnabled(1);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
