@@ -27,7 +27,9 @@
 
 
     <input type="text" th:field="*{name}"
-           class="form-control mb-4 col-4" placeholder="Category Name" >
+           class="form-control mb-4 col-4" placeholder="Category Name" th:errorClass="is-invalid" >
+
+      <div th:if="${#fields.hasErrors('edition')}" th:errors="*{edition}" class="invalid-feedback"></div>
     <br>
 
     <button type="submit" class="btn btn-info col-2">Save</button>
