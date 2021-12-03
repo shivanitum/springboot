@@ -29,35 +29,18 @@
     <p> Enter Title:</p>
     <div class="form-row py-1">
       <input type="text" th:field="*{title}"
-             class="form-control  col-4" placeholder="Title" th:errorClass="is-invalid" required oninvalid="InvalidMsg(this);"
-             oninput="InvalidMsg(this);">
+             class="form-control  col-4" placeholder="Title" th:errorClass="is-invalid" >
       <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="invalid-feedback"></div>
     </div>
 
     <p> Enter Edition:</p>
     <div class="form-row py-1">
       <input type="text" class="form-control mb-4 col-4" name="edition" th:value="*{edition}"
-             placeholder="Enter edition" th:errorClass="is-invalid" required oninvalid="InvalidMsg(this);"
-             oninput="InvalidMsg(this);">
+             placeholder="Enter edition" th:errorClass="is-invalid" >
 
       <div th:if="${#fields.hasErrors('edition')}" th:errors="*{edition}" class="invalid-feedback"></div>
     </div>
-    <script>
-        function InvalidMsg(textbox) {
-
-            if (textbox.value === '') {
-                textbox.setCustomValidity
-                      ('Entering a valid name or edition is necessary');
-            } else if (textbox.validity.typeMismatch) {
-                textbox.setCustomValidity
-                      ('Please enter a value which is valid!');
-            } else {
-                textbox.setCustomValidity('');
-            }
-
-            return true;
-        }
-    </script>
+    
 
 
     <br>
