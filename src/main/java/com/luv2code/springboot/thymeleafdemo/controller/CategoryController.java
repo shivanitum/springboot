@@ -94,8 +94,11 @@ public class CategoryController {
     }
 
     @PostMapping("/save")
-    public String saveCategory(@ModelAttribute("category") CategoryDTO theCategory) {
-
+    public String saveCategory(@ModelAttribute("category") CategoryDTO theCategory,BindingResult result) {
+         if(result.hasErrors())
+         {
+             return "category/category-form";
+         }
         // save the category
         Category categoryEntity=categoryConverter.dtoToEntity(theCategory);
         categoryService.save(categoryEntity);
@@ -121,10 +124,7 @@ public class CategoryController {
         category.add(bookEntity);
         bookEntity.setCategory(category);
 
-        if(bookEntity.getTitle().equals("")){
-            bindingResult.addError(new FieldError("bookEntity","title","username already exists"));
-            System.out.println("Error present"+bookEntity.getTitle());
-        }
+        
         if(bindingResult.hasErrors()){
             return "category/book-form";
         }
